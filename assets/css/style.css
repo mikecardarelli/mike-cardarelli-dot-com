@@ -1,0 +1,318 @@
+/* =============================================================
+   Reset & Base
+   ============================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Font loading — add Adobe Fonts <link> tag to both HTML files, then these names resolve.
+   Sans-serif: "neue-haas-grotesk-display" (Adobe Fonts)
+   Serif:      "freight-text-pro"          (Adobe Fonts) */
+
+:root {
+  --font-sans:  "neue-haas-grotesk-display", -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: "freight-text-pro", Georgia, 'Times New Roman', serif;
+  --color-black: rgba(0, 0, 0, 0.85);
+  --color-blue:  rgba(51, 51, 204, 0.85);
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  background: #fff;
+  color: var(--color-black);
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* =============================================================
+   Layout — two-column with independent scroll
+   ============================================================= */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* =============================================================
+   Nav
+   ============================================================= */
+.nav {
+  width: 270px;
+  flex-shrink: 0;
+  padding: 22px 20px 30px 26px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--color-black);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.nav-links {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.nav-links li { line-height: 1.85; }
+
+.nav-section {
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 4px;
+  margin-top: 2px;
+}
+
+.nav-links a.active {
+  outline: 1px solid var(--color-blue);
+  padding: 0 2px;
+}
+
+/* =============================================================
+   Homepage — image panel
+   ============================================================= */
+.main-home {
+  flex: 1;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* =============================================================
+   CMY Effect
+   ============================================================= */
+.svg-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cmy-wrapper {
+  position: relative;
+  width: min(78vh, 90%);
+  aspect-ratio: 1 / 1;
+  cursor: crosshair;
+}
+
+.cmy-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  user-select: none;
+  pointer-events: none;
+}
+
+.layer-cyan    { filter: url(#to-cyan); }
+.layer-magenta { filter: url(#to-magenta); }
+.layer-yellow  { filter: url(#to-yellow); }
+
+/* =============================================================
+   Bio page — scrollable content panel
+   ============================================================= */
+.main-bio {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 22px 44px 60px 40px;
+}
+
+.bio-heading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+/* Bio intro: text left, photo right */
+.bio-top {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+  margin-bottom: 44px;
+}
+
+.bio-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.bio-text p {
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.bio-resume {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  margin-top: 4px;
+}
+
+.bio-photo {
+  width: 230px;
+  flex-shrink: 0;
+  display: block;
+  border: 3px solid var(--color-blue);
+}
+
+/* =============================================================
+   Bio table — WORK / EDUCATION / CONTACT rows
+   ============================================================= */
+.bio-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bio-table tr { border-top: 1px solid #ccc; }
+
+.bio-table td {
+  padding: 20px 0;
+  vertical-align: top;
+}
+
+.bio-table .section-label {
+  width: 34%;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  padding-right: 24px;
+  padding-top: 22px;
+}
+
+.bio-entries { width: 66%; }
+
+.bio-entry {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.bio-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.entry-name {
+  display: block;
+  font-weight: bold;
+  color: var(--color-blue);
+  margin-bottom: 2px;
+}
+
+.entry-name a {
+  font-weight: bold;
+  color: var(--color-blue);
+}
+
+.entry-location {
+  display: block;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.entry-degree {
+  display: block;
+  font-size: 13px;
+  margin-top: 1px;
+}
+
+/* Contact icons */
+.contact-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.contact-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blue);
+}
+
+.contact-icons a:hover { opacity: 0.75; text-decoration: none; }
+
+.icon-email,
+.icon-linkedin {
+  width: 22px;
+  height: 18px;
+}
+
+.icon-linkedin {
+  width: 22px;
+  height: 22px;
+}
+
+/* =============================================================
+   Responsive
+   ============================================================= */
+@media (max-width: 768px) {
+  html, body { height: auto; }
+
+  .layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .nav {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .main-home {
+    height: auto;
+    overflow: visible;
+    padding: 24px 16px;
+    min-height: 80vw;
+  }
+
+  .cmy-wrapper {
+    width: min(90vw, 90%);
+  }
+
+  .main-bio {
+    height: auto;
+    overflow: visible;
+    padding: 20px 18px 40px;
+  }
+
+  .bio-top {
+    flex-direction: column;
+  }
+
+  .bio-photo {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .bio-table .section-label {
+    width: 28%;
+    padding-right: 12px;
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mike Cardarelli</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- SVG filter definitions: convert black-on-white image to cyan/magenta/yellow lines on transparent -->
+  <svg class="svg-filters" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="to-cyan" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="
+           0      0      0      0      0
+           0      0      0      0      1
+           0      0      0      0      1
+          -0.333 -0.333 -0.333  0      1"/>
+      </filter>
+      <filter id="to-magenta" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="
+           0      0      0      0      1
+           0      0      0      0      0
+           0      0      0      0      1
+          -0.333 -0.333 -0.333  0      1"/>
+      </filter>
+      <filter id="to-yellow" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="
+           0      0      0      0      1
+           0      0      0      0      1
+           0      0      0      0      0
+          -0.333 -0.333 -0.333  0      1"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="layout">
+
+    <nav class="nav">
+      <h1 class="site-title">MIKE CARDARELLI</h1>
+      <ul class="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/Short-Bio/">Short Bio</a></li>
+      </ul>
+      <p class="nav-section">DIY PROJECTS</p>
+      <ul class="nav-links">
+        <li><a href="#">Showpaper Mapped</a></li>
+        <li><a href="#">Silo Five Font</a></li>
+        <li><a href="#">City Henge</a></li>
+        <li><a href="#">Playoff Pain Index</a></li>
+        <li><a href="#">Ridgewood Sports History</a></li>
+        <li><a href="#">Oldcore NYC</a></li>
+        <li><a href="#">Joie de Vivek Podcast</a></li>
+        <li><a href="#">JDV NFTs</a></li>
+        <li><a href="#">Soccer Points Pool</a></li>
+        <li><a href="#">Racing Points Pool</a></li>
+        <li><a href="#">Set Times Dot Org</a></li>
+        <li><a href="#">Punt Planet</a></li>
+      </ul>
+    </nav>
+
+    <main class="main-home">
+      <div class="cmy-wrapper" id="cmy">
+        <img class="cmy-layer layer-cyan"    src="assets/images/face.png" alt="Mike Cardarelli illustration">
+        <img class="cmy-layer layer-magenta" src="assets/images/face.png" alt="">
+        <img class="cmy-layer layer-yellow"  src="assets/images/face.png" alt="">
+      </div>
+    </main>
+
+  </div>
+
+  <script src="assets/js/cmy.js"></script>
+</body>
+</html>
