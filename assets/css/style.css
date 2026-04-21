@@ -4,7 +4,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --font-sans:  "Hanken Grotesk", -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   --font-serif: "Lora", Georgia, 'Times New Roman', serif;
   --color-black: rgba(0, 0, 0, 0.85);
   --color-blue:  rgb(0, 0, 255);
@@ -37,7 +37,7 @@ a:hover { text-decoration: underline; }
    Nav
    ============================================================= */
 .nav {
-  width: 270px;
+  width: 340px;
   flex-shrink: 0;
   padding: 22px 20px 30px 26px;
   overflow-y: auto;
@@ -45,9 +45,9 @@ a:hover { text-decoration: underline; }
 }
 
 .site-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-style: italic;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: normal;
   color: var(--color-black);
   margin-bottom: 10px;
@@ -57,14 +57,17 @@ a:hover { text-decoration: underline; }
 .nav-links {
   list-style: none;
   margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: 20px;
 }
 
-.nav-links li { line-height: 1.85; }
+.nav-links li { line-height: 1.65; }
 
 .nav-section {
-  font-weight: bold;
+  font-family: var(--font-sans);
+  font-weight: normal;
   font-style: normal;
-  font-size: 15px;
+  font-size: 20px;
   color: #000;
   margin-bottom: 4px;
   margin-top: 2px;
@@ -133,9 +136,9 @@ a:hover { text-decoration: underline; }
 }
 
 .bio-heading {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-style: italic;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: normal;
   margin-bottom: 30px;
 }
@@ -154,12 +157,15 @@ a:hover { text-decoration: underline; }
 }
 
 .bio-text p {
+  font-family: var(--font-serif);
+  font-size: 20px;
   line-height: 1.6;
   margin-bottom: 18px;
 }
 
 .bio-resume {
   display: inline-block;
+  font-family: var(--font-sans);
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -214,12 +220,14 @@ a:hover { text-decoration: underline; }
 
 .entry-name {
   display: block;
+  font-family: var(--font-serif);
   font-weight: bold;
   color: var(--color-blue);
   margin-bottom: 2px;
 }
 
 .entry-name a {
+  font-family: var(--font-serif);
   font-weight: bold;
   color: var(--color-blue);
 }
@@ -227,12 +235,12 @@ a:hover { text-decoration: underline; }
 .entry-location {
   display: block;
   font-style: italic;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .entry-degree {
   display: block;
-  font-size: 13px;
+  font-size: 16px;
   margin-top: 1px;
 }
 
