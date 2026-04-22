@@ -5,7 +5,7 @@
 
 :root {
   --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: "Lora", Georgia, 'Times New Roman', serif;
+  --font-serif: "Spectral", Georgia, 'Times New Roman', serif;
   --color-black: rgba(0, 0, 0, 0.85);
   --color-blue:  rgb(0, 0, 255);
 }
@@ -58,6 +58,7 @@ a:hover { text-decoration: underline; }
   list-style: none;
   margin-bottom: 10px;
   font-family: var(--font-serif);
+  font-weight: 300;
   font-size: 20px;
 }
 
@@ -85,9 +86,6 @@ a:hover { text-decoration: underline; }
   flex: 1;
   height: 100vh;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
@@ -103,11 +101,21 @@ a:hover { text-decoration: underline; }
 }
 
 .cmy-wrapper {
-  position: relative;
-  width: min(78vh, 90%);
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
   cursor: crosshair;
+}
+
+.cmy-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.4);
+  user-select: none;
+  pointer-events: none;
 }
 
 .cmy-layer {
@@ -117,6 +125,7 @@ a:hover { text-decoration: underline; }
   height: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
+  opacity: 0.6;
   user-select: none;
   pointer-events: none;
 }
@@ -158,7 +167,8 @@ a:hover { text-decoration: underline; }
 
 .bio-text p {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-weight: 300;
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 18px;
 }
@@ -166,7 +176,8 @@ a:hover { text-decoration: underline; }
 .bio-resume {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-weight: 300;
+  font-size: 18px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-blue);
@@ -185,27 +196,29 @@ a:hover { text-decoration: underline; }
    ============================================================= */
 .bio-table {
   width: 100%;
-  border-collapse: collapse;
 }
 
-.bio-table tr { border-top: 1px solid #ccc; }
-
-.bio-table td {
+.bio-row {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+  border-top: 1px solid #ccc;
   padding: 20px 0;
-  vertical-align: top;
 }
 
 .bio-table .section-label {
-  width: 34%;
-  font-size: 12px;
+  flex: 1;
+  font-size: 18px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-black);
-  padding-right: 24px;
-  padding-top: 22px;
+  padding-top: 2px;
 }
 
-.bio-entries { width: 66%; }
+.bio-entries {
+  width: clamp(260px, 38%, 420px);
+  flex-shrink: 0;
+}
 
 .bio-entry {
   padding-bottom: 16px;
@@ -221,26 +234,32 @@ a:hover { text-decoration: underline; }
 .entry-name {
   display: block;
   font-family: var(--font-serif);
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 18px;
   color: var(--color-blue);
   margin-bottom: 2px;
 }
 
 .entry-name a {
   font-family: var(--font-serif);
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 20px;
   color: var(--color-blue);
 }
 
 .entry-location {
   display: block;
+  font-family: var(--font-serif);
+  font-weight: 300;
   font-style: italic;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .entry-degree {
   display: block;
-  font-size: 16px;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 18px;
   margin-top: 1px;
 }
 
@@ -294,13 +313,14 @@ a:hover { text-decoration: underline; }
 
   .main-home {
     height: auto;
-    overflow: visible;
-    padding: 24px 16px;
     min-height: 80vw;
+    overflow: hidden;
   }
 
   .cmy-wrapper {
-    width: min(90vw, 90%);
+    position: relative;
+    width: 100%;
+    height: 80vw;
   }
 
   .main-bio {
@@ -318,8 +338,10 @@ a:hover { text-decoration: underline; }
     max-width: 280px;
   }
 
-  .bio-table .section-label {
-    width: 28%;
-    padding-right: 12px;
+  .bio-row { gap: 16px; }
+
+  .bio-entries {
+    width: auto;
+    flex: 1;
   }
 }

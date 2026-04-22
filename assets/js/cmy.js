@@ -2,18 +2,14 @@
   var container = document.getElementById('cmy');
   if (!container) return;
 
-  var cyan    = container.querySelector('.layer-cyan');
-  var magenta = container.querySelector('.layer-magenta');
-  var yellow  = container.querySelector('.layer-yellow');
-  var els     = { cyan: cyan, magenta: magenta, yellow: yellow };
+  var base   = container.querySelector('.cmy-base');
+  var cyan   = container.querySelector('.layer-cyan');
+  var yellow = container.querySelector('.layer-yellow');
+  var els    = { cyan: cyan, yellow: yellow };
 
-  // Each layer follows a sinusoidal path with different frequencies.
-  // px/py = Math.PI/2 so all layers start at (0,0) when t=0 —
-  // after a converge they drift cleanly outward with no jump.
   var cfg = {
-    cyan:    { ax: 26, ay: 20, fx: 0.00080, fy: 0.00065, px: 0, py: Math.PI / 2 },
-    magenta: { ax: 22, ay: 26, fx: 0.00065, fy: 0.00080, px: 0, py: Math.PI / 2 },
-    yellow:  { ax: 20, ay: 22, fx: 0.00095, fy: 0.00070, px: 0, py: Math.PI / 2 },
+    cyan:   { ax: 44, ay: 40, fx: 0.00220, fy: 0.00216, px: 0, py: Math.PI / 2 },
+    yellow: { ax: 38, ay: 42, fx: 0.00260, fy: 0.00256, px: 0, py: Math.PI / 2 },
   };
 
   var rafId     = null;
@@ -30,7 +26,7 @@
       var c = cfg[name];
       var x = Math.sin(t * c.fx + c.px) * c.ax;
       var y = Math.cos(t * c.fy + c.py) * c.ay;
-      els[name].style.transform = 'translate(' + x.toFixed(2) + 'px, ' + y.toFixed(2) + 'px)';
+      els[name].style.transform = 'scale(1.4) translate(' + x.toFixed(2) + 'px, ' + y.toFixed(2) + 'px)';
     }
 
     rafId = requestAnimationFrame(driftTick);
@@ -45,6 +41,7 @@
     drifting  = true;
     startTime = null;
     for (var name in els) els[name].style.transition = 'none';
+    base.style.filter = '';
     rafId = requestAnimationFrame(driftTick);
   }
 
@@ -52,13 +49,13 @@
     clearTimeout(holdTimer);
     stopDrift();
 
-    // Animate all layers to center
+    base.style.filter = 'none';
+
     for (var name in els) {
       els[name].style.transition = 'transform 0.5s ease-in-out';
-      els[name].style.transform  = 'translate(0, 0)';
+      els[name].style.transform  = 'scale(1.4) translate(0, 0)';
     }
 
-    // Hold briefly, then drift apart from center
     holdTimer = setTimeout(startDrift, 900);
   }
 
