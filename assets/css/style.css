@@ -37,7 +37,7 @@ a:hover { text-decoration: underline; }
    Nav
    ============================================================= */
 .nav {
-  width: 340px;
+  width: 290px;
   flex-shrink: 0;
   padding: 22px 20px 30px 26px;
   overflow-y: auto;

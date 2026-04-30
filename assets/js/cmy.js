@@ -8,8 +8,8 @@
   var els    = { cyan: cyan, yellow: yellow };
 
   var cfg = {
-    cyan:   { ax: 42, ay: 16, fx: 0.00220, fy: 0.00216, px: 0, py: Math.PI / 2 },
-    yellow: { ax: 16, ay: 42, fx: 0.00260, fy: 0.00256, px: 0, py: Math.PI / 2 },
+    cyan:   { ax: 42, ay: 16, fx: 0.00150, fy: 0.00147, px: 0, py: Math.PI / 2 },
+    yellow: { ax: 16, ay: 42, fx: 0.00175, fy: 0.00172, px: 0, py: Math.PI / 2 },
   };
 
   var rafId     = null;
