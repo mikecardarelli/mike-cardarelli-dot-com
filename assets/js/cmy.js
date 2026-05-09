@@ -2,63 +2,64 @@
   var container = document.getElementById('cmy');
   if (!container) return;
 
-  var base   = container.querySelector('.cmy-base');
   var cyan   = container.querySelector('.layer-cyan');
   var yellow = container.querySelector('.layer-yellow');
   var els    = { cyan: cyan, yellow: yellow };
 
   var cfg = {
-    cyan:   { ax: 42, ay: 16, fx: 0.00150, fy: 0.00147, px: 0,        py: Math.PI / 2 },
-    yellow: { ax: 42, ay: 16, fx: 0.00150, fy: 0.00147, px: Math.PI, py: Math.PI / 2 },
+    cyan:   { ax: 42, ay: 16, fx: 0.001875, fy: 0.001838, px: 0,        py: Math.PI / 2, oa: 0 },
+    yellow: { ax: 42, ay: 16, fx: 0.001875, fy: 0.001838, px: Math.PI, py: Math.PI / 2, oa: 0 },
   };
 
   var rafId     = null;
   var startTime = null;
-  var drifting  = true;
-  var holdTimer = null;
 
   function driftTick(ts) {
-    if (!drifting) return;
     if (startTime === null) startTime = ts;
     var t = ts - startTime;
 
     for (var name in cfg) {
       var c = cfg[name];
-      var x = Math.sin(t * c.fx + c.px) * c.ax;
-      var y = Math.cos(t * c.fy + c.py) * c.ay;
+      var rx = Math.sin(t * c.fx + c.px) * c.ax;
+      var ry = Math.cos(t * c.fy + c.py) * c.ay;
+      var co = Math.cos(c.oa), so = Math.sin(c.oa);
+      var x = rx * co - ry * so;
+      var y = rx * so + ry * co;
       els[name].style.transform = 'scale(1.4) translate(' + x.toFixed(2) + 'px, ' + y.toFixed(2) + 'px)';
     }
 
     rafId = requestAnimationFrame(driftTick);
   }
 
-  function stopDrift() {
-    drifting = false;
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-  }
-
   function startDrift() {
-    drifting  = true;
     startTime = null;
-    for (var name in els) els[name].style.transition = 'none';
-    base.style.filter = '';
     rafId = requestAnimationFrame(driftTick);
   }
 
-  function onHover() {
-    clearTimeout(holdTimer);
-    stopDrift();
+  // Slider controls
+  var speedEl    = document.getElementById('ctrl-speed');
+  var spreadEl   = document.getElementById('ctrl-spread');
+  var rotationEl = document.getElementById('ctrl-rotation');
 
-    base.style.filter = 'none';
-
-    for (var name in els) {
-      els[name].style.transition = 'transform 0.5s ease-in-out';
-      els[name].style.transform  = 'scale(1.4) translate(0, 0)';
-    }
-
-    holdTimer = setTimeout(startDrift, 900);
+  function applyControls() {
+    var s  = speedEl    ? +speedEl.value    : 5;
+    var d  = spreadEl   ? +spreadEl.value   : 5;
+    var rv = rotationEl ? +rotationEl.value : 5;
+    var fx = s * 0.000375;
+    var ax = d * 8 + 2;
+    var ay = Math.round(d * 3 + 1);
+    var oa = (rv - 5) * 18 * Math.PI / 180;  // value 5 → 0°, ±90° range
+    cfg.cyan.fx   = fx;  cfg.cyan.fy   = fx * 0.98;
+    cfg.cyan.ax   = ax;  cfg.cyan.ay   = ay;
+    cfg.cyan.oa   = oa;
+    cfg.yellow.fx = fx;  cfg.yellow.fy = fx * 0.98;
+    cfg.yellow.ax = ax;  cfg.yellow.ay = ay;
+    cfg.yellow.oa = oa;
   }
 
+  if (speedEl)    speedEl.addEventListener('input',    applyControls);
+  if (spreadEl)   spreadEl.addEventListener('input',   applyControls);
+  if (rotationEl) rotationEl.addEventListener('input', applyControls);
+
   startDrift();
-  container.addEventListener('mouseenter', onHover);
 })();
